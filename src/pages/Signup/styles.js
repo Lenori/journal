@@ -16,6 +16,7 @@ export const Banner = styled.div`
 export const Content = styled.div`
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     width: 80%;
@@ -29,6 +30,24 @@ export const Content = styled.div`
 
     @media(max-width: 1000px) {
         flex-direction: column;
+    }    
+
+    p {
+        color: #FDF8F4;
+        font-size: 17px;
+        width: 60%;
+        text-align: center;
+        font-weight: lighter;
+
+        @media(max-width: 1000px) {
+        width: 90%;
+        }
+
+        a {
+            color: inherit;
+            font-weight: bold;
+            display: block;
+        }
     }
 `;
 
@@ -61,18 +80,6 @@ export const Title = styled.div`
             color: #FAF11D;
         }
     }
-
-    p {
-        color: #FDF8F4;
-        font-size: 17px;
-        width: 60%;
-        font-weight: lighter;
-        margin: 30px auto 0;
-
-        @media(max-width: 1000px) {
-        width: 90%;
-        }
-    }
 `;
 
 export const Form = styled.div`
@@ -82,6 +89,7 @@ export const Form = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 40%;
+    margin: 60px 0;
 
     @media(max-width: 1490px) {
         width: 35%;
