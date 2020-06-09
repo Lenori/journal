@@ -8,6 +8,7 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Trips from '../pages/Trips';
 import Journal from '../pages/Journal';
+import Plan from '../pages/Plan';
 
 export default function Routes() {
     return(
@@ -17,6 +18,7 @@ export default function Routes() {
             <Route path="/register" component={Signup} />
 
             <Route path="/trips" component={Trips} />
+            <Route path="/plan" component={Plan} />
             <Route path="/journal" component={Journal} />
         </Switch>
     )
