@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Content, Items, Item} from './styles';
 
-import {FaMapMarkerAlt, FaNewspaper ,FaStar} from 'react-icons/fa'
+import {FaMapMarkerAlt, FaNewspaper, FaStar} from 'react-icons/fa'
 
 class Services extends Component {
     render() {
