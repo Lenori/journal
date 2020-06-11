@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 import nature from '../../assets/nature.jpg';
 
@@ -69,7 +69,7 @@ export const Form = styled.div`
     align-items: center;
     text-align: center;
     justify-content: space-between;
-    width: 60%;
+    width: 75%;
     margin: 60px 0;
 
     @media(max-width: 1120px) {
@@ -98,6 +98,11 @@ export const Form = styled.div`
                 z-index: 1000;
                 top: 25%;
                 left: 20px;
+
+                &:last-child {
+                    top: 25%;
+                    left: 105%;
+                }
             }
         }
     }
@@ -131,6 +136,14 @@ export const Form = styled.div`
             filter: brightness(90%);
         }
     }
+`;
+
+export const Leg = styled.section`
+    width: 48%;
+
+    ${props => props.half && css`        
+        width: 22% !important;
+    `}
 `;
 
 export const Formsave = styled.div`
@@ -196,5 +209,42 @@ export const Formsave = styled.div`
             &:hover {
                 filter: brightness(90%);
             }
+    }
+`;
+
+export const Share = styled.div`
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    margin: 90px auto;
+
+    @media(max-width: 1000px) {
+        width: 80%;
+        margin: 0 0 50px;
+    }
+
+    h1 {
+        font-family: Pattaya;
+        font-size: 50px;
+        font-weight: lighter;
+        color: white;
+        line-height: 70px;
+
+        span {
+            font-size: 80px;
+            color: #FAF11D;
+        }
+    }
+
+    section {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 200px;
+        justify-content: space-between;
+        margin: 30px auto 0;
     }
 `;

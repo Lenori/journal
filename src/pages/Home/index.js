@@ -5,7 +5,39 @@ import Header from '../../components/Header';
 import Services from '../../components/Services';
 import Footer from '../../components/Footer';
 
+import InputAutosuggest from '../../components/Autosuggest';
+
 class Home extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            trip: {
+                starting: '',
+                destination: ''
+            },
+            suggestions: []
+        };
+
+        this.updateTrip = this.updateTrip.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    updateTrip(field, value) {
+        const newTrip = {
+            starting: field == 'starting' ? value : this.state.trip.starting,
+            destination: field == 'destination' ? value : this.state.trip.destination
+        }
+
+        this.setState({trip: newTrip});
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        this.props.history.push(`/plan?starting=${this.state.trip.starting}&destination=${this.state.trip.destination}`);
+    }
+
     render() {
         return(
             <>
@@ -19,10 +51,18 @@ class Home extends Component {
                         </Title>
 
                         <Form>
-                            <form>
-                                <input type="text" placeholder="Starting" />
-                                <input type="text" placeholder="Destination" />
-                                
+                            <form onSubmit={this.handleSubmit}>
+                                <InputAutosuggest
+                                    id="starting"
+                                    placeholder="Starting"
+                                    onChange={this.updateTrip}
+                                />
+
+                                <InputAutosuggest
+                                    id="destination"
+                                    placeholder="Destination"
+                                    onChange={this.updateTrip}
+                                />                                
                                 <button type="submit">Plan trip!</button>
                             </form>
                         </Form>
