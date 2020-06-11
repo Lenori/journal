@@ -13,7 +13,7 @@ class Map extends Component {
     super();
 
     this.state = {
-        directions: null
+        directions: []
     };
   }
 
@@ -32,8 +32,8 @@ class Map extends Component {
       {
         origin: origin,
         destination: destination,
+        waypoints: waypoints,
         travelMode: google.maps.TravelMode.DRIVING,
-        waypoints: waypoints
       }, (result, status) => {
             if (status === google.maps.DirectionsStatus.OK) {
                 this.setState({
@@ -50,20 +50,21 @@ class Map extends Component {
       const MapComponent = withGoogleMap(props => (
           <GoogleMap
               defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)}
-              defaultZoom={7}
+              defaultZoom={5}
           >
 
             <DirectionsRenderer
-                directions={this.state.directions}
+                directions={props.directions}
             />
 
           </GoogleMap>
       ));
         return(
             <MapComponent
-            loadingElement={<div style={{ height: `100%`}} />}
-            containerElement={<div style={{ height: `900px`}} />}
-            mapElement={<div style={{ height: `100%` }} />}
+              loadingElement={<div style={{ height: `100%`}} />}
+              containerElement={<div style={{ height: `900px`}} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              directions={this.state.directions}
             />
         )
     }

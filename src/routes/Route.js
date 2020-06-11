@@ -14,12 +14,12 @@ export default function RouteWrapper({
 
     if (!signed && isPrivate) {
         toast.error('Resource available only for logged users.');
-        return <Redirect to='/' />
+        return <Redirect to='/login' />
     }
 
     if (signed && !isPrivate) {
         toast.error('Login successfull.');
-        return <Redirect to ='/dashboard' />
+        return <Redirect to ='/trips' />
     }
 
     return <Route {...rest} component={Component} />
