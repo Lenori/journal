@@ -295,3 +295,69 @@ export const Share = styled.div`
         margin: 30px auto 0;
     }
 `;
+
+export const Formsave = styled.div`
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    margin: 60px auto;
+
+    @media(max-width: 1120px) {
+        width: 90%;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    input {
+        height: 70px;
+        width: 100%;
+        margin: 0 0 30px;
+        background: #333c39;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        border: none;
+        color: #fdf8f4;
+        text-align: left;
+        font-size: 17px;
+        padding: 0 30px;
+
+        &::placeholder {
+                color: #fdf8f4;
+            }
+    }
+
+    textarea {
+        height: 300px;
+        width: 100%;
+        margin: 0 0 30px;
+        background: #333c39;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        border: none;
+        color: #fdf8f4;
+        text-align: left;
+        font-size: 17px;
+        padding: 25px 30px;
+        font-family: Roboto slab;
+
+        &::placeholder {
+                color: #fdf8f4;
+            }
+    }
+
+    button {
+
+        background-color: #FAF11D;
+        border: none;
+        width: 120px;
+        height: 60px;
+        transition: filter 0.3s;
+
+            &:hover {
+                filter: brightness(90%);
+            }
+    }
+`;

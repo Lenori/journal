@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {FaCalendarAlt, FaFacebook, FaTwitter, FaCopy} from 'react-icons/fa'
 
-import {Banner, Content, Title, Items, Leg, Leginfo, Legactions, Entry, Entryinfo, Entrytext, Share} from './styles';
+import {Banner, Content, Title, Items, Leg, Leginfo, Legactions, Entry, Entryinfo, Entrytext, Share, Formsave} from './styles';
 
 import Header from '../../components/Header';
 import Services from '../../components/Services';
@@ -14,6 +14,7 @@ class Journal extends Component {
         super();
 
         this.state = {
+            newEntry: false,
             trip: {  
                 id: 1,
                 title: 'Road trip with Lisa and Mike',
@@ -80,40 +81,57 @@ class Journal extends Component {
                     </Content>
                 </Banner>
 
-                <Items>
-                    {this.state.trip.legs.map(leg => (
-                        <>
-                            <Leg key={leg.id}>
-                                <Leginfo>
-                                    <h1>{leg.place}</h1>
-                                    <section>
-                                        <p>{leg.desc}</p>
-                                        <p><FaCalendarAlt size={15} color={'#FFFFFF'} /><span>{leg.date}</span></p>
-                                    </section>
-                                </Leginfo>
-
-                                <Legactions>
-                                    <Stars review={leg.review} />
-                                    <section>
-                                        <button>New entry</button>
-                                    </section>
-                                </Legactions>
-                            </Leg>
-
-                            {leg.entries.map(entry => (
-                                <Entry key={entry.id}>
-                                    <Entryinfo>
-                                        <h1>{entry.title}</h1>
+                {!this.state.newEntry ? (
+                    <Items>
+                        {this.state.trip.legs.map(leg => (
+                            <>
+                                <Leg key={leg.id}>
+                                    <Leginfo>
+                                        <h1>{leg.place}</h1>
                                         <section>
-                                            <p><FaCalendarAlt size={15} color={'#333C39'} /><span>{entry.date}</span></p>
+                                            <p>{leg.desc}</p>
+                                            <p><FaCalendarAlt size={15} color={'#FFFFFF'} /><span>{leg.date}</span></p>
                                         </section>
-                                        <Entrytext>{entry.content}</Entrytext>
-                                    </Entryinfo>
-                                </Entry>
-                            ))}
-                        </>
-                    ))}
-                </Items>
+                                    </Leginfo>
+
+                                    <Legactions>
+                                        <Stars review={leg.review} />
+                                        <section>
+                                            <button onClick={() => (this.setState({newEntry: true}))}>New entry</button>
+                                        </section>
+                                    </Legactions>
+                                </Leg>
+
+                                {leg.entries.map(entry => (
+                                    <Entry key={entry.id}>
+                                        <Entryinfo>
+                                            <h1>{entry.title}</h1>
+                                            <section>
+                                                <p><FaCalendarAlt size={15} color={'#333C39'} /><span>{entry.date}</span></p>
+                                            </section>
+                                            <Entrytext>{entry.content}</Entrytext>
+                                        </Entryinfo>
+                                    </Entry>
+                                ))}
+                            </>
+                        ))}
+                    </Items>
+                ) : (
+                    <Formsave>
+                        <form>
+                            <input
+                                type="text"
+                                placeholder="Title of your entry"
+                            />
+
+                            <textarea
+                                placeholder="Content">                                    
+                            </textarea>
+                            
+                            <button type="submit">Save Entry</button>
+                        </form>
+                    </Formsave>
+                )}
 
                 <Share>
                     <h1>Share this <span>journal</span></h1>

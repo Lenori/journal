@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {FaCalendarAlt, FaSearch, FaTimesCircle, FaFacebook, FaTwitter, FaCopy} from 'react-icons/fa'
 
-import {Banner, Content, Title, Form, Formsave, Share} from './styles';
+import {Banner, Content, Title, Form, Formsave, Share, Leg} from './styles';
 
 import Map from '../../components/Map';
 import Services from '../../components/Services';
@@ -154,7 +154,7 @@ class Plan extends Component {
 
                                 {this.state.trip.legs.map((leg, index) => (
                                     <>
-                                        <section>
+                                        <Leg>
                                             <FaSearch size={25} color={'#333C39'} />
                                             <InputAutosuggest
                                                 id="place"
@@ -162,9 +162,19 @@ class Plan extends Component {
                                                 placeholder="Search"
                                                 onChange={this.updateLeg}
                                             />
-                                        </section>
+                                        </Leg>
 
-                                        <section>
+                                        <Leg half>
+                                            <FaCalendarAlt size={25} color={'#333C39'} />
+                                            <input
+                                                type="text"
+                                                placeholder="Date"
+                                                value={leg.date}
+                                                onChange={e => this.updateLeg(null, e.target.value, index)}
+                                            />
+                                        </Leg>
+                                        <Leg half>
+
                                             <FaCalendarAlt size={25} color={'#333C39'} />
                                             <input
                                                 type="text"
@@ -173,7 +183,7 @@ class Plan extends Component {
                                                 onChange={e => this.updateLeg(null, e.target.value, index)}
                                             />
                                             {leg.place && leg.date ? (<FaTimesCircle size={30} color={'#FAF11D'} onClick={e => this.removeLeg(e, index)} />) : ''}                                            
-                                        </section>
+                                        </Leg>
                                     </>
                                 ))}
 
