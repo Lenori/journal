@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
+import Select from 'react-select'
 import {FaCalendarAlt, FaSearch, FaTimesCircle, FaFacebook, FaTwitter, FaCopy} from 'react-icons/fa'
 
 import {Banner, Content, Title, Form, Formsave, Share, Leg} from './styles';
+import selectStyles from '../../styles/selectInputStyles';
 
 import Map from '../../components/Map';
 import Services from '../../components/Services';
 import Footer from '../../components/Footer';
-
-import InputAutosuggest from '../../components/Autosuggest';
 
 class Plan extends Component {
     constructor(props) {
@@ -27,7 +27,12 @@ class Plan extends Component {
                 destination: destination ? destination : '',
                 destinationDate: '',
                 legs: []             
-            }
+            },
+            options: [
+                { value: 'Park 1', label: 'Park 1' },
+                { value: 'Park 2', label: 'Park 2' },
+                { value: 'Park 3', label: 'Park 3' }
+            ]
         };
 
         this.updateTrip = this.updateTrip.bind(this);
@@ -76,10 +81,6 @@ class Plan extends Component {
 
     updateLeg(field, value, index) {
         let legs = this.state.trip.legs;
-
-        console.log(field);
-        console.log(value);
-        console.log(index);
 
         legs[index].place = field == 'place' ? value : legs[index].place;
         legs[index].date = field == 'date' ? value : legs[index].date;
@@ -138,12 +139,12 @@ class Plan extends Component {
                         <Form>
                             <form>
                                 <section>
-                                    <FaSearch size={25} color={'#333C39'} />
-                                    <InputAutosuggest
-                                        id="starting"
-                                        value={this.state.trip.starting}
-                                        placeholder="Starting"
-                                        onChange={this.updateTrip}
+                                    <Select
+                                        options={this.state.options}
+                                        styles={selectStyles}
+                                        onChange={e => this.updateTrip('starting', e.value)}
+                                        className='select-input'
+                                        placeholder='Starting'
                                     />
                                 </section>
                             
@@ -155,12 +156,12 @@ class Plan extends Component {
                                 {this.state.trip.legs.map((leg, index) => (
                                     <>
                                         <Leg>
-                                            <FaSearch size={25} color={'#333C39'} />
-                                            <InputAutosuggest
-                                                id="place"
-                                                index={index}
-                                                placeholder="Search"
-                                                onChange={this.updateLeg}
+                                            <Select
+                                                options={this.state.options}
+                                                styles={selectStyles}
+                                                onChange={e => this.updateLeg('starting', e.value, index)}
+                                                className='select-input'
+                                                placeholder='Starting'
                                             />
                                         </Leg>
 
@@ -190,12 +191,12 @@ class Plan extends Component {
                                 <button onClick={e => this.addLeg(e)}>Add leg</button>
 
                                 <section>
-                                    <FaSearch size={25} color={'#333C39'} />
-                                    <InputAutosuggest
-                                        id="destination"
-                                        value={this.state.trip.destination}
-                                        placeholder="Destination"
-                                        onChange={this.updateTrip}
+                                    <Select
+                                        options={this.state.options}
+                                        styles={selectStyles}
+                                        onChange={e => this.updateTrip('destination', e.value)}
+                                        className='select-input'
+                                        placeholder='Destination'
                                     />
                                 </section>
 

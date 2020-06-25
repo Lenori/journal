@@ -39,4 +39,11 @@ export default createGlobalStyle`
         cursor: pointer;
     }
 
+    .select-input {
+        input {
+            box-shadow: none;
+            margin: 0;
+        }
+    }
+
 `;

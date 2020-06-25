@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import Select from 'react-select'
+
 import {Banner, Content, Title, Form} from './styles';
+import selectStyles from '../../styles/selectInputStyles';
 
 import Header from '../../components/Header';
 import Services from '../../components/Services';
 import Footer from '../../components/Footer';
-
-import InputAutosuggest from '../../components/Autosuggest';
 
 class Home extends Component {
     constructor() {
@@ -16,7 +17,11 @@ class Home extends Component {
                 starting: '',
                 destination: ''
             },
-            suggestions: []
+            options: [
+                    { value: 'Park 1', label: 'Park 1' },
+                    { value: 'Park 2', label: 'Park 2' },
+                    { value: 'Park 3', label: 'Park 3' }
+                ]
         };
 
         this.updateTrip = this.updateTrip.bind(this);
@@ -25,8 +30,8 @@ class Home extends Component {
 
     updateTrip(field, value) {
         const newTrip = {
-            starting: field == 'starting' ? value : this.state.trip.starting,
-            destination: field == 'destination' ? value : this.state.trip.destination
+            starting: field == 'starting' ? value.value : this.state.trip.starting,
+            destination: field == 'destination' ? value.value : this.state.trip.destination
         }
 
         this.setState({trip: newTrip});
@@ -52,17 +57,21 @@ class Home extends Component {
 
                         <Form>
                             <form onSubmit={this.handleSubmit}>
-                                <InputAutosuggest
-                                    id="starting"
-                                    placeholder="Starting"
-                                    onChange={this.updateTrip}
+                                <Select
+                                    options={this.state.options}
+                                    styles={selectStyles}
+                                    onChange={e => this.updateTrip('starting', e)}
+                                    className='select-input'
+                                    placeholder='Starting'
                                 />
 
-                                <InputAutosuggest
-                                    id="destination"
-                                    placeholder="Destination"
-                                    onChange={this.updateTrip}
-                                />                                
+                                <Select
+                                    options={this.state.options}
+                                    styles={selectStyles}
+                                    onChange={e => this.updateTrip('destination', e)}
+                                    className='select-input'
+                                    placeholder='Destination'
+                                />                              
                                 <button type="submit">Plan trip!</button>
                             </form>
                         </Form>
