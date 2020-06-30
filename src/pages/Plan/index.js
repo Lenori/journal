@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Select from 'react-select'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import {FaCalendarAlt, FaSearch, FaTimesCircle, FaFacebook, FaTwitter, FaCopy} from 'react-icons/fa'
 
 import {Banner, Content, Title, Form, Formsave, Share, Leg} from './styles';
@@ -23,9 +25,9 @@ class Plan extends Component {
                 name: '',
                 description: '',
                 starting: starting ? starting : '',
-                startingDate: '',
+                startingDate: new Date(),
                 destination: destination ? destination : '',
-                destinationDate: '',
+                destinationDate: new Date(),
                 legs: []             
             },
             options: [
@@ -63,7 +65,8 @@ class Plan extends Component {
         const legs = this.state.trip.legs;
         legs.push({
             place: '',
-            date: ''
+            startingDate: new Date(),
+            endingDate: new Date()
         });
 
         const newTrip = {
@@ -83,7 +86,10 @@ class Plan extends Component {
         let legs = this.state.trip.legs;
 
         legs[index].place = field == 'place' ? value : legs[index].place;
-        legs[index].date = field == 'date' ? value : legs[index].date;
+        legs[index].startingDate = field == 'startingDate' ? value : legs[index].startingDate;
+        legs[index].endingDate = field == 'endingDate' ? value : legs[index].endingDate;
+
+        console.log(legs);
 
         const newTrip = {
             name: this.state.trip.name,
@@ -150,7 +156,11 @@ class Plan extends Component {
                             
                                 <section>
                                     <FaCalendarAlt size={25} color={'#333C39'} />
-                                    <input type="text" placeholder="Date" />
+                                    <DatePicker
+                                        selected={this.state.trip.startingDate}
+                                        onChange={date => this.updateTrip('startingDate', date)}
+                                        className="date-input"
+                                    />
                                 </section>
 
                                 {this.state.trip.legs.map((leg, index) => (
@@ -159,7 +169,7 @@ class Plan extends Component {
                                             <Select
                                                 options={this.state.options}
                                                 styles={selectStyles}
-                                                onChange={e => this.updateLeg('starting', e.value, index)}
+                                                onChange={e => this.updateLeg('place', e.value, index)}
                                                 className='select-input'
                                                 placeholder='Starting'
                                             />
@@ -167,23 +177,21 @@ class Plan extends Component {
 
                                         <Leg half>
                                             <FaCalendarAlt size={25} color={'#333C39'} />
-                                            <input
-                                                type="text"
-                                                placeholder="Date"
-                                                value={leg.date}
-                                                onChange={e => this.updateLeg(null, e.target.value, index)}
+                                            <DatePicker
+                                                selected={leg.startingDate}
+                                                onChange={date => this.updateLeg('startingDate', date, index)}
+                                                className="date-input"
                                             />
                                         </Leg>
                                         <Leg half>
 
                                             <FaCalendarAlt size={25} color={'#333C39'} />
-                                            <input
-                                                type="text"
-                                                placeholder="Date"
-                                                value={leg.date}
-                                                onChange={e => this.updateLeg(null, e.target.value, index)}
+                                            <DatePicker
+                                                selected={leg.endingDate}
+                                                onChange={date => this.updateLeg('endingDate', date, index)}
+                                                className="date-input"
                                             />
-                                            {leg.place && leg.date ? (<FaTimesCircle size={30} color={'#FAF11D'} onClick={e => this.removeLeg(e, index)} />) : ''}                                            
+                                            {leg.place && leg.startingDate && leg.endingDate ? (<FaTimesCircle size={30} color={'#FAF11D'} onClick={e => this.removeLeg(e, index)} />) : ''}                                            
                                         </Leg>
                                     </>
                                 ))}
@@ -202,7 +210,11 @@ class Plan extends Component {
 
                                 <section>
                                     <FaCalendarAlt size={25} color={'#333C39'} />
-                                    <input type="text" placeholder="Date" />
+                                    <DatePicker
+                                        selected={this.state.trip.destinationDate}
+                                        onChange={date => this.updateTrip('destinationDate', date)}
+                                        className="date-input"
+                                    />
                                 </section>
                             </form>
                         </Form>

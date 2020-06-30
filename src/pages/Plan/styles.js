@@ -88,6 +88,61 @@ export const Form = styled.div`
             width: 48%;
             position: relative;
 
+            .react-datepicker-wrapper {
+                display: inline-block;
+                padding: 0;
+                border: 0;
+                width: 100%;
+
+                button {
+                    background-color: unset !important;
+                }
+            }
+
+            .react-datepicker__tab-loop {
+                z-index: 3;
+                display: block;
+                position: relative;
+                top: -130px;
+                left: 10px;
+            }
+
+            .react-datepicker__navigation--next {
+                margin: unset;
+                background: none;
+                line-height: 1.7rem;
+                text-align: center;
+                cursor: pointer;
+                position: absolute;
+                top: 10px;
+                padding: 0;
+                border: 0.45rem solid transparent;
+                z-index: 1;
+                height: 10px;
+                width: 10px;
+                text-indent: -999em;
+                overflow: hidden;
+                border-left-color: #ccc !important;
+            }
+
+            .react-datepicker__navigation--previous {
+                margin: unset;
+                background: none;
+                line-height: 1.7rem;
+                text-align: center;
+                cursor: pointer;
+                position: absolute;
+                top: 10px;
+                padding: 0;
+                border: 0.45rem solid transparent;
+                z-index: 1;
+                height: 10px;
+                width: 10px;
+                text-indent: -999em;
+                overflow: hidden;
+                border-right-color: #ccc !important;
+            }
+
             input {
                 width: 100%;
                 padding: 0 60px;
@@ -95,7 +150,7 @@ export const Form = styled.div`
 
             svg {
                 position: absolute;
-                z-index: 1000;
+                z-index: 2;
                 top: 25%;
                 left: 20px;
 
