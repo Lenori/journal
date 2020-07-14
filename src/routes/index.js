@@ -10,6 +10,7 @@ import Profile from '../pages/Profile';
 import Trips from '../pages/Trips';
 import Journal from '../pages/Journal';
 import Plan from '../pages/Plan';
+import Places from '../pages/Places';
 
 export default function Routes() {
     return(
@@ -22,6 +23,7 @@ export default function Routes() {
             <Route path="/trips" component={Trips} />
             <Route path="/plan" component={Plan} />
             <Route path="/journal" component={Journal} />
+            <Route path="/places" component={Places} />
         </Switch>
     )
 }
