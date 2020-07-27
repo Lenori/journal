@@ -49,7 +49,7 @@ class Signin extends Component {
                             </form>
                         </Form>
 
-                        <p>Don't have an account? <Link to="/login">Create a new one.</Link></p>
+                        <p>Don't have an account? <Link to="/register">Create a new one.</Link></p>
 
                     </Content>
                 </Banner>

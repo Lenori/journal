@@ -11,6 +11,8 @@ import Map from '../../components/Map';
 import Services from '../../components/Services';
 import Footer from '../../components/Footer';
 
+import SigninModal from '../../modals/Signin';
+
 class Plan extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +22,8 @@ class Plan extends Component {
         const destination = params.get('destination');
 
         this.state = {
+            logged: false,
+            openModal: false,
             trip_id: null,
             trip: {
                 name: '',
@@ -126,6 +130,11 @@ class Plan extends Component {
     saveTrip(e) {
         e.preventDefault();
 
+        if (!this.state.logged) {
+            this.setState({openModal: true});
+            return;
+        }
+
         //Save trip on database and return ID
 
         this.setState({trip_id: 1}) // place ID on trip_id
@@ -228,19 +237,23 @@ class Plan extends Component {
                                 <input
                                     type="text"
                                     value={this.state.trip.name}
-                                    onChange={e => this.updateTrip(null, null, null, null, e.target.value, null)}
+                                    onChange={e => this.updateTrip('name', e.target.value)}
                                     placeholder="Name of your trip"
                                 />
 
                                 <textarea
                                     value={this.state.trip.description}
-                                    onChange={e => this.updateTrip(null, null, null, null, null, e.target.value)}
+                                    onChange={e => this.updateTrip('description', e.target.value)}
                                     placeholder="Description">                                    
                                 </textarea>
                                 
                                 <button type="submit">Save trip</button>
                             </form>
                         </Formsave>
+                        
+                        {this.state.openModal &&
+                            <SigninModal openModal={true} />
+                        }
 
                     </Content>
                     ) : (
