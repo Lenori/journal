@@ -21,6 +21,7 @@ class Places extends Component {
             userLat: null,
             userLon: null,
             places: [],
+            categories: [],
             options: [
                     { value: 'Park 1', label: 'Park 1' },
                     { value: 'Park 2', label: 'Park 2' },
@@ -30,31 +31,62 @@ class Places extends Component {
 
         this.places = this.places.bind(this);
         this.updatePlaces = this.updatePlaces.bind(this);
+        this.updateCategories = this.updateCategories.bind(this);
         this.userLocation = this.userLocation.bind(this);
+    }
+
+    updateCategories(places) {
+        let categories = this.state.categories;
+
+        places.map(place => {
+            console.log(place.category);
+            let index = categories.findIndex(category => category.name == place.category);
+
+            console.log(index);
+
+            if (index > -1) {
+                categories[index].total = categories[index].total + 1;
+            } else {
+                let newCategory = {
+                    name: place.category,
+                    total: 1
+                }
+
+                categories.push(newCategory);
+            }
+        });
+
+        console.log(categories);
+        
+        this.setState({categories: categories});
     }
 
     places() {
         const places = [
-            {title: 'Place 01', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 02', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 03', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 04', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 05', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 06', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'}
+            {title: 'Place 01', category: 'restaurant', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 02', category: 'restaurant', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 03', category: 'restaurant', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 04', category: 'bar', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 05', category: 'bar', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 06', category: 'clothing', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'}
         ];
+
+        this.updateCategories(places);
 
         this.setState({places: places});
     }
 
     updatePlaces(value) {
         const places = [
-            {title: 'Place 01', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 02', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 03', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 04', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 05', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
-            {title: 'Place 06', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'}
+            {title: 'Place 01', category: 'restaurant', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 02', category: 'restaurant', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 03', category: 'restaurant', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 04', category: 'bar', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 05', category: 'bar', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'},
+            {title: 'Place 06', category: 'clothing', description: 'Lorem ipsum dolor sit amet lorem ipsum dolor sit amet', hours: '09h00 - 18h00'}
         ];
+
+        this.updateCategories(places);
 
         this.setState({
             place: value,
@@ -103,7 +135,10 @@ class Places extends Component {
                     </Content>
                 </Banner>
 
-                <Results places={this.state.places} />
+                <Results
+                    categories={this.state.categories}
+                    places={this.state.places}
+                />
 
                 <Services />
                 <Footer />

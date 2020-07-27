@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const Content = styled.div`
     position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
     width: 80%;
     max-width: 1400px;
@@ -38,16 +38,47 @@ export const Content = styled.div`
     }
 `;
 
+export const Categories = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 25%;
+    flex-direction: column;
+
+    @media(max-width: 1000px) {
+        flex-direction: row;
+        padding: 0 20px 50px;
+        justify-content: space-between;
+        width: 100%;
+    }    
+
+`;
+
+export const Category = styled.p`
+    color: #333C39 !important;
+    text-align: left !important;
+    cursor: pointer;
+    width: auto !important;
+
+    &:hover {
+        font-weight: bold !important;
+    }
+
+    ${props => props.selected && css`
+        font-weight: bold !important;
+    `}
+`;
+
 export const Items = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 100%;
+    width: 75%;
     flex-wrap: wrap;
 `;
 
 export const Item = styled.div`
-    display: flex;
+    display: none;
     justify-content: flex-start;
     align-items: flex-start;
     width: 25%;
@@ -55,6 +86,10 @@ export const Item = styled.div`
     color: #333C39;
     padding: 20px;
     margin: 0 0 20px 0;
+
+    ${props => props.show && css `
+        display: flex;
+    `}
 
     @media(max-width: 1300px) {
         width: 33.33%;
